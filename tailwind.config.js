@@ -4,11 +4,9 @@ const colorShades = require('./index');
 module.exports = {
     content: ["./src/*.html"],
     theme: {
-        extend: {
-            colors: {
-                ferrari: '#ff0000'
-            }
-        },
+        shades: {
+            ferrari: '#ff0000'
+        }
     },
     plugins: [
         colorShades({

@@ -45,7 +45,7 @@ module.exports = plugin.withOptions(function (options) {
     const levels = options.levels == null ? ALL_LEVELS : options.levels.filter(level => ALL_LEVELS.includes(level));
 
     return function ({ theme, e, addUtilities }) {
-        const colors = theme('colors', {});
+        const colors = theme('shades', {});
 
         function forEachShade(cb) {
             const exclude = ['inherit', 'current', 'transparent', 'black', 'white'];
@@ -65,12 +65,6 @@ module.exports = plugin.withOptions(function (options) {
             }, { 500: shade });
         };
 
-        const shades = forEachShade(shade => {
-            return forEachLevel(shade, (val, intensity) => {
-                return pSBC(intensity, val);
-            });
-        });
-
         const utilities = {
             bg: (value) => ({
                 'background-color': value
@@ -80,6 +74,22 @@ module.exports = plugin.withOptions(function (options) {
             }),
             border: (value) => ({
                 'border-color': value
+            }),
+            'border-t': (value) => ({
+                '--tw-border-opacity': 1,
+                'border-top-color': value
+            }),
+            'border-r': (value) => ({
+                '--tw-border-opacity': 1,
+                'border-right-color': value
+            }),
+            'border-b': (value) => ({
+                '--tw-border-opacity': 1,
+                'border-bottom-color': value
+            }),
+            'border-l': (value) => ({
+                '--tw-border-opacity': 1,
+                'border-left-color': value
             }),
             outline: (value) => ({
                 'outline-color': value
@@ -109,7 +119,13 @@ module.exports = plugin.withOptions(function (options) {
             }),
         };
 
-        let acc = [];
+        const shades = forEachShade(shade => {
+            return forEachLevel(shade, (val, intensity) => {
+                return pSBC(intensity, val);
+            });
+        });
+
+        const acc = [];
         Object.entries(shades).forEach(([name, shades]) => {
             Object.entries(utilities).forEach(([utility, fn]) => {
                 acc.push([`.${e(`${prefix}${utility}-${name}`)}`, fn(shades[500])]);
