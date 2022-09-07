@@ -1,18 +1,32 @@
 {
   "name": "tailwind-plugin-color-shades",
   "version": "1.0.0",
-  "description": "",
+  "description": "TailwindCSS plugin to generate shades of any given colors. ",
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf public && mkdir public",
-    "prebundle": "npm run clean",
-    "bundle:style": "tailwindcss -i src/style.css -o public/style.css",
-    "bundle": "cp -r src/index.html public/index.html && npm run bundle:style"
+    "predemo": "npm run clean",
+    "demo:style": "tailwindcss -i src/style.css -o public/style.css",
+    "demo": "cp -r src/index.html public/index.html && npm run demo:style"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "tailwind",
+    "tailwindcss",
+    "plugin",
+    "tailwindcss-plugin",
+    "color-palette"
+  ],
+  "author": "didof",
   "license": "ISC",
   "devDependencies": {
     "tailwindcss": "^3.1.8"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/didof/tailwindcss-color-shades.git"
+  },
+  "bugs": {
+    "url": "https://github.com/didof/tailwindcss-color-shades/issues"
+  },
+  "homepage": "https://github.com/didof/tailwindcss-color-shades#readme"
 }
